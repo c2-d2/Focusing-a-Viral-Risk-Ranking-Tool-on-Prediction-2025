@@ -1,5 +1,5 @@
 # Set working directory
-setwd("/Users/katherinebudeski/Documents/Risk Ranking Spillover Tool")
+setwd("INSERT WORKING DIRECTORY")
 
 # Load libraries
 library(tidyverse)
@@ -76,8 +76,7 @@ plot_spillover <- data.frame(
   OriginalRanks = original_ranks,
   AdjustedRanks = adjusted_ranks,
   OriginalScores = original_scores,
-  AdjustedScores = adjusted_scores
-)
+  AdjustedScores = adjusted_scores)
 
 # Identify the top ten highest and lowest original scores
 top_10_original <- plot_spillover %>% arrange(desc(NormalizedOriginalScores)) %>% head(10)
@@ -267,7 +266,6 @@ print(paste("AUC for Adjusted Risk Scores: ", round(auc_adjusted, 2)))
 # 
 # print(paste("AUC for Original Risk Scores: ", round(auc_original, 2)))
 # print(paste("AUC for Adjusted Risk Scores: ", round(auc_adjusted, 2)))
-
 
 ### FIGURE 3. Comparing Human and Non-Human Viruses Across Risk Factors
 
