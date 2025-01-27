@@ -15,5 +15,5 @@
 # STEP 3: Run the R Script (Spillover_Evaluation_Analysis_2025.R)
 ## STEP 3 is required to visualize and analyze the data. This R Script was edited and run in R Studio.
 ### Set working directory.
-### Load data.
+### Load organized data from step 2.
 ### Run code to reproduce Figures 1, 2, and 3.
