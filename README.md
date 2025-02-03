@@ -16,4 +16,4 @@
 ## STEP 3 is required to visualize and analyze the data. This R Script was edited and run in R Studio.
 ### Set working directory.
 ### Load organized data from step 2.
-### Run code to reproduce Figures 1, 2, and 3.
+### Run code to reproduce Figures 1 and 2.
