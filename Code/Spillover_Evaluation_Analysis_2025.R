@@ -76,7 +76,8 @@ plot_spillover <- data.frame(
   OriginalRanks = original_ranks,
   AdjustedRanks = adjusted_ranks,
   OriginalScores = original_scores,
-  AdjustedScores = adjusted_scores)
+  AdjustedScores = adjusted_scores
+)
 
 # Identify the top ten highest and lowest original scores
 top_10_original <- plot_spillover %>% arrange(desc(NormalizedOriginalScores)) %>% head(10)
@@ -137,9 +138,9 @@ custom_shapes <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
 ggplot(plot_spillover, aes(x = NormalizedOriginalScores, y = NormalizedAdjustedScores, shape = VirusFamily, color = HumanVirus)) +
   geom_point(size = 3) +
   scale_shape_manual(values = custom_shapes) +
-  scale_color_manual(values = c("Yes" = "blue", "No" = "red")) +
+  scale_color_manual(values = c("Yes" = "steelblue", "No" = "darkorange")) +
   labs(
-    title = "Normalized Original vs. Adjusted Risk Scores by Viral Family and Human Virus Classification",
+    title = "Normalized Original vs. Adjusted Risk Scores",
     x = "Normalized Original Risk Scores",
     y = "Normalized Adjusted Risk Scores",
     color = "Human Virus Classification",
@@ -147,10 +148,13 @@ ggplot(plot_spillover, aes(x = NormalizedOriginalScores, y = NormalizedAdjustedS
   theme_minimal() +
   theme(
     text = element_text(family = "Times New Roman", face = "bold"),
-    legend.position = "right") +
+    legend.position = "right", 
+    legend.text = element_text(size = 8), 
+    legend.key.height = unit(0.4, "cm"), 
+    legend.key.width = unit(0.4, "cm")) +
   coord_equal()  
 
-### FIGURE 2. ROC Curve for "Human Virus?" Factor
+### ROC Curve for "Human Virus?" Factor
 
 # Load library
 library(pROC)
@@ -267,7 +271,8 @@ print(paste("AUC for Adjusted Risk Scores: ", round(auc_adjusted, 2)))
 # print(paste("AUC for Original Risk Scores: ", round(auc_original, 2)))
 # print(paste("AUC for Adjusted Risk Scores: ", round(auc_adjusted, 2)))
 
-### FIGURE 3. Comparing Human and Non-Human Viruses Across Risk Factors
+
+### FIGURE 2. Comparing Human and Non-Human Viruses Across Risk Factors
 
 # Load libraries
 library(dplyr)
@@ -305,7 +310,7 @@ mean_spillover <- spillover_data %>%
     SD = sd(Score, na.rm = TRUE),
     .groups = 'drop')
 
-# Calculate mean and SD for individual spillover dependent factors
+# Calculate means and SDs for individual spillover dependent factors
 spillover_data <- spillover %>%
   select(all_of(spillover_dependent_factors), HumanVirus = `Human Virus?`) %>%
   pivot_longer(cols = -HumanVirus, names_to = "Variable", values_to = "Score") %>%
@@ -418,7 +423,7 @@ ggplot(combined_data, aes(x = Variable, y = Mean, color = HumanVirus, shape = Fa
   theme_minimal() +
   theme(
     text = element_text(family = "Times New Roman", face = "bold"), 
-    axis.text.y = element_text(size = 10, face = "plain", hjust = 1, vjust = 0.5), 
+    axis.text.y = element_text(size = 10, face = "bold", hjust = 1, vjust = 0.5), 
     axis.ticks.y = element_line(size = 0.5, color = "black"), 
     legend.position = "bottom",
     strip.text = element_blank(), 
@@ -427,5 +432,5 @@ ggplot(combined_data, aes(x = Variable, y = Mean, color = HumanVirus, shape = Fa
     plot.margin = margin(t = 10, r = 10, b = 10, l = 10)) +
   scale_shape_manual(
     values = c("Spillover Dependent" = 16, "Non-Spillover Dependent" = 17),
-    name = "Risk Factor Category") +
+    name = "Risk Factor") +
   scale_color_manual(values = c("Yes" = "steelblue", "No" = "darkorange"))
