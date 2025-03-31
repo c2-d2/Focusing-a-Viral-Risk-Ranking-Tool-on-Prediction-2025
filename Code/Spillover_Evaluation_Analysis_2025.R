@@ -6,8 +6,7 @@ library(tidyverse)
 library(dplyr)
 
 # Load data
-library("readxl")
-spillover <- read_excel("structured_spillover_ranking_weighted.xlsx")
+spillover <- read.csv("structured_spillover_ranking_weighted.csv", check.names = FALSE)
 
 # Label the risk factors 
 non_spillover_dependent_factors <- c("Host plasticity - No. of species - Weighted Score",	
